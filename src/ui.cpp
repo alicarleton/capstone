@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdint>
 
 #define TRANSMISSION_SUCCESS 0
 #define TRANSMISSION_FAILURE 1
@@ -18,14 +19,20 @@ int main()
     while (true)
     {
         std::getline(std::cin, input);
-        if (input == "exit") break;     // putting this here for now. it won't be necessary if sigint (ctrl + c) is supported on the OS we'll install on the pi
+        if (input == "exit") break;     // putting this here for now. it won't be necessary if sigint (ctrl + c) is supported wherever this program is running
         send_message(input);
     }
     return 0;
 }
 
-// TODO: send_message() function body
 int send_message(std::string& input)
 {
+    uint8_t ascii;
+    std::cout << "the string is " << input << std::endl;
+    for (char ch : input)
+    {
+        ascii = static_cast<uint8_t>(ch);
+        // TODO: transmit the ascii character to pi. it is an 8 bit value
+    }
     return TRANSMISSION_FAILURE;
 }
